@@ -176,3 +176,5 @@ __marimo__/
 
 # Abstra
 .abstra/
+
+*.db
