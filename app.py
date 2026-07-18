@@ -12,6 +12,7 @@ import click
 import sys
 from sqlalchemy import select
 
+
 # 创建应用实例
 app = Flask(__name__)
 
@@ -61,7 +62,7 @@ def forge():
     db.create_all()
 
     # 全局的两个变量移动到这个函数内
-    name = 'Grey Li'
+    name = 'Zhang Jing'
     movies = [
         {'title': 'My Neighbor Totoro', 'year': '1988'},
         {'title': 'Dead Poets Society', 'year': '1989'},
@@ -90,11 +91,11 @@ def forge():
 @app.route("/home")
 def index():
     # 查询单条用户记录
-    user = db.session.execute(select(User)).scalar()
+    # user = db.session.execute(select(User)).scalar()
     # 查询全部电影记录
     movies = db.session.execute(select(Movie)).scalars().all()
     # 将数据传给 index.html 模板
-    return render_template('index.html', user=user, movies=movies)
+    return render_template('index.html',  movies=movies)  #user=user,
 
 # 用户动态路由
 @app.route("/user/<name>")
@@ -110,6 +111,17 @@ def test_url_for():
     print(url_for("test_url_for"))
     print(url_for("test_url_for", num=2))
     return "Test page — 查看终端打印的URL"
+
+@app.errorhandler(404)
+def page_not_found(error):
+    user = db.session.execute(select(User)).scalar()
+    return render_template('404.html'), 404  #,user=user
+
+# 模板上下文处理器：全局注入user变量到所有模板
+@app.context_processor
+def inject_user():
+    user = db.session.execute(select(User)).scalar()
+    return dict(user=user)
 
 # 程序启动入口
 if __name__ == "__main__":
