@@ -18,7 +18,6 @@ novel_tokenizer_folder/
 .DS_Store
 Thumbs.db
 *.log
-.env
 
 # ========== GitHub官方通用Python忽略模板 ==========
 # Byte-compiled / optimized / DLL files
@@ -28,6 +27,8 @@ Thumbs.db
 # C extensions
 *.so
 
+# 私密环境配置文件，禁止提交Git
+.env
 # Distribution / packaging
 .Python
 build/
