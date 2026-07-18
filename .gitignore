@@ -1,10 +1,18 @@
+# ========== 你的项目自定义忽略项 ==========
 # Python缓存文件
 *.pyc
 __pycache__/
 *~
 
-# 虚拟环境（关键，你的.venv文件夹）
+# 虚拟环境
 .venv/
+
+# uv Python版本标记文件
+.python-version
+
+# 模型权重、分词器文件夹
+*.pth
+novel_tokenizer_folder/
 
 # 系统文件
 .DS_Store
@@ -12,9 +20,158 @@ Thumbs.db
 *.log
 .env
 
-# uv Python版本标记文件
-.python-version
+# ========== GitHub官方通用Python忽略模板 ==========
+# Byte-compiled / optimized / DLL files
+*.py[codz]
+*$py.class
 
-# 训练模型相关文件
-*.pth
-novel_tokenizer_folder/
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pdm
+.pdm-python
+.pdm-build/
+
+# pixi
+.pixi
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Redis
+*.rdb
+*.aof
+*.pid
+
+# RabbitMQ
+mnesia/
+rabbitmq/
+rabbitmq-data/
+
+# ActiveMQ
+activemq-data/
+
+# SageMath
+*.sage.py
+
+# 各类环境文件夹
+.envrc
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder
+.spyderproject
+.spyproject
+
+# mkdocs
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# pytype
+.pytype/
+
+# Cython debug
+cython_debug/
+
+# VS Code / 临时文件
+tempCodeRunnerFile.py
+.ruff_cache/
+.pypirc
+
+# marimo
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+
+# streamlit
+.streamlit/secrets.toml
+
+# Abstra
+.abstra/
