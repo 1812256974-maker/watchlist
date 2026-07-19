@@ -1,5 +1,5 @@
 # 基础Flask导入
-from flask import Flask, url_for, render_template
+from flask import Flask, url_for, render_template, request, redirect, flash
 from markupsafe import escape
 # SQLAlchemy数据库相关导入
 from flask_sqlalchemy import SQLAlchemy
@@ -15,7 +15,8 @@ from sqlalchemy import select
 
 # 创建应用实例
 app = Flask(__name__)
-
+# 密钥配置（必须放在数据库配置前面/后面都行，只要在使用flash之前）
+app.config['SECRET_KEY'] = 'dev'  # 等同于 app.secret_key = 'dev'
 # SQLite数据库配置
 SQLITE_PREFIX = 'sqlite:///' if sys.platform.startswith('win') else 'sqlite:////'
 db_path = Path(__file__).parent / "watchlist.db"
@@ -86,16 +87,27 @@ def forge():
     click.echo('Done.')
 
 # 首页路由
-@app.route("/")
 @app.route("/index")
 @app.route("/home")
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    # 查询单条用户记录
-    # user = db.session.execute(select(User)).scalar()
-    # 查询全部电影记录
+    if request.method == 'POST':  # 判断是否是 POST 请求
+        # 获取表单数据
+        title = request.form.get('title')  # 传入表单对应输入字段的 name 值
+        year = request.form.get('year')
+        # 验证数据
+        if not title or not year or len(year) != 4 or len(title) > 60:
+            flash('Invalid title or year!')  # 显示错误提示
+            return redirect(url_for('index'))  # 重定向回主页
+        # 保存表单数据到数据库
+        movie = Movie(title=title, year=year)  # 创建记录
+        db.session.add(movie)  # 添加到数据库会话
+        db.session.commit()  # 提交数据库会话
+        flash('Item created.')  # 显示成功创建的提示
+        return redirect(url_for('index'))  # 重定向回主页
+
     movies = db.session.execute(select(Movie)).scalars().all()
-    # 将数据传给 index.html 模板
-    return render_template('index.html',  movies=movies)  #user=user,
+    return render_template('index.html', movies=movies)
 
 # 用户动态路由
 @app.route("/user/<name>")
