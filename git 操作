@@ -1,0 +1,37 @@
+
+
+
+# 1. 克隆项目，会给你一个git 仓库url ：git@gitee.com:j1805070901/watchlist.git
+
+git clone git@gitee.com:j1805070901/watchlist.git
+
+私有仓库里面，你已经权限。git 账号user 密码pw。 本地把ssh密钥生成。配置企业仓库后台 ssh
+
+# 2. 配环境，读代码
+uv
+
+用户分支
+
+# 3. 分需求
+
+git checkout master /main
+git pull
+
+git checkout -b 开发分支 /需求分支
+
+写代码
+
+git add
+
+git commit
+
+git push
+
+# 4.提PR
+需求号
+
+
+-------
+
+
+
